@@ -1,4 +1,4 @@
-package com.rkaaya.limepublisher;
+package com.rkaaya.limepublisher.runnable;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
