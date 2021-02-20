@@ -1,0 +1,14 @@
+{
+  "modelPackage": "com.rkaaya.lime.server.model",
+  "apiPackage": "com.rkaaya.lime.server.api",
+  "java8": true,
+  "useRuntimeException": true,
+  "dataLibrary": "java8",
+  "hideGenerationTimeStamp": true,
+  "openApiNullable": false,
+  "template": "spring-boot",
+  "interfaceOnly": true,
+  "importMappings": {
+    "Lime": "com.rkaaya.lime.domain.model.Lime"
+  }
+}

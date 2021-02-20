@@ -10,9 +10,18 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.rkaaya.lime</groupId>
     <artifactId>domain</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
 
+    <name>API - Domain</name>
+
+    <description>Api Pojos</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
     
 </project>
