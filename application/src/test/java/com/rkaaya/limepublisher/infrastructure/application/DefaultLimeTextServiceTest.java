@@ -5,7 +5,6 @@ import com.rkaaya.limepublisher.api.domain.LimePartialResult;
 import com.rkaaya.limepublisher.api.services.LimeTextProcessor;
 import com.rkaaya.limepublisher.api.services.messaging.ApiEventProducer;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.concurrent.CompletableFuture;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,7 +28,6 @@ class DefaultLimeTextServiceTest {
     private DefaultLimeTextService limeTextService;
 
     @Test
-    @Disabled
     void processLime() {
         final Integer pStart = 2;
         final Integer pEnd = 3;
@@ -43,10 +40,8 @@ class DefaultLimeTextServiceTest {
 
         LimePartialResult limePartialResult = Mockito.mock(LimePartialResult.class);
 
-        CompletableFuture<LimePartialResult> limePartialResultCompletableFuture = Mockito.mock(CompletableFuture.class);
-
-        Mockito.doReturn(limePartialResultCompletableFuture).when(limeTextProcessor)
-                .processRequest(Mockito.any(), Mockito.any(), Mockito.any());
+        CompletableFuture<LimePartialResult> limePartialResultCompletableFuture = new CompletableFuture<>();
+        limePartialResultCompletableFuture.complete(limePartialResult);
 
         Mockito.when(limeTextProcessor.processRequest(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(limePartialResultCompletableFuture);
 
@@ -56,13 +51,13 @@ class DefaultLimeTextServiceTest {
 
         Lime lime = limeTextService.processLime(pStart, pEnd, wCountMin, wCountMax);
 
-        verify(limeTextProcessor.processRequest(2,4,5), times(1));
-        verify(limeTextProcessor.processRequest(3,4,5), times(1));
+        verify(limeTextProcessor, times(1)).processRequest(2,4,5);
+        verify(limeTextProcessor, times(1)).processRequest(3,4,5);
         verify(apiEventProducer, times(1)).publish(lime);
 
         Assertions.assertNotNull(lime);
         Assertions.assertEquals(mostFW, lime.getFreqWord());
-        Assertions.assertEquals(avgT, lime.getTotalProcessingTime());
+        Assertions.assertEquals(avgT, lime.getAvgParagraphProcessingTime());
         Assertions.assertEquals(avgP, lime.getAvgParagraphSize());
 
     }

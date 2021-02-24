@@ -28,7 +28,7 @@ public class DefaultLimeTextService implements LimeTextService {
             CompletableFuture<LimePartialResult>[] partialResults = new CompletableFuture[caseCount];
 
             for (int i = 0; i < caseCount; i++) {
-                partialResults[i] = limeTextProcessor.processRequest(i + pStart, 1, 25);
+                partialResults[i] = limeTextProcessor.processRequest(i + pStart, wCountMin, wCountMax);
             }
 
             CompletableFuture.allOf(partialResults).join();
