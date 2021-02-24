@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: LimePublisher
+  kafka.producer.key-serializer: org.apache.kafka.common.serialization.StringSerializer
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        limte-text-out:
+          destination: words.processed
+          contentType: application/json
+          producer:
+            partition-count: 4
+
+server:
+  port: 8080

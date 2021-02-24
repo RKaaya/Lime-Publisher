@@ -13,7 +13,7 @@ paths:
         - lime
       summary: Process text
       description: Returns a lime response
-      operationId: getLime
+      operationId: processLimeText
       parameters:
         - name: p_start
           in: query
@@ -80,10 +80,10 @@ components:
           description: avg_paragraph_size
         avg_paragraph_processing_time:
           type: number
-          description: avg_paragraph_processing_time
+          description: avg_paragraph_processing_time, in nanoseconds
         total_processing_time:
           type: number
-          description: total_processing_time
+          description: total_processing_time, in nanoseconds
       example:
         freq_word: "lime"
         avg_paragraph_size: 16
