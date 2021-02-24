@@ -4,19 +4,13 @@ import com.rkaaya.limepublisher.api.domain.RandomText;
 import com.rkaaya.limepublisher.api.services.RandomTextService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @AllArgsConstructor
@@ -29,7 +23,7 @@ public class DefaultRandomTextService implements RandomTextService {
         return getRandomTextWithHttpInfo(number_of_paragraphs, min_number_of_words_per_sentence, max_number_of_words_per_senteces).getBody();
     }
 
-    public ResponseEntity<RandomText> getRandomTextWithHttpInfo(final Integer number_of_paragraphs, final Integer min_number_of_words_per_sentence, final Integer max_number_of_words_per_senteces) throws RestClientException {
+    private ResponseEntity<RandomText> getRandomTextWithHttpInfo(final Integer number_of_paragraphs, final Integer min_number_of_words_per_sentence, final Integer max_number_of_words_per_senteces) throws RestClientException {
         // verify the required parameters are set
         if (number_of_paragraphs == null || min_number_of_words_per_sentence == null || max_number_of_words_per_senteces == null) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'number_of_paragraphs' when calling getRandomTextWithHttpInfo");

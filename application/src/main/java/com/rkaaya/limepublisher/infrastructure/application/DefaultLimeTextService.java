@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @AllArgsConstructor
 @Slf4j
@@ -53,8 +54,10 @@ public class DefaultLimeTextService implements LimeTextService {
 
             log.info("Result: {}", result);
             apiEventProducer.publish(result);
-        } catch (Exception ex) {
-            log.error("SOMETHING HAPPENED: {}", ex.getMessage());
+        } catch (InterruptedException ex) {
+            log.error("Interrupted: {}", ex.getMessage());
+        } catch (ExecutionException ex) {
+            log.error("Execution error: {}", ex.getMessage());
         }
         return result;
     }

@@ -1,0 +1,91 @@
+openapi: 3.0.1
+info:
+  title: Lime Publisher
+  description: 'This is a sample Lime Publisher.'
+  version: 1.0.0
+tags:
+  - name: lime
+    description: The only one endpoint of Lime Publisher
+paths:
+  /betvictor/text:
+    get:
+      tags:
+        - lime
+      summary: Process text
+      description: Returns a lime response
+      operationId: processLimeText
+      parameters:
+        - name: p_start
+          in: query
+          description: indicates the start number of paragraphs
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example: 1
+        - name: p_end
+          in: query
+          description: indicates the end number of paragraphs
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example: 100
+        - name: w_count_min
+          in: query
+          description: indicates min number of words in each paragraph
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example: 1
+        - name: w_count_max
+          in: query
+          description: indicates max number of words in each paragraph
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example: 25
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lime'
+        400:
+          description: Invalid parameters are supplied
+          content: {}
+        404:
+          description: Not found
+          content: {}
+
+components:
+  schemas:
+    Lime:
+      required:
+        - freq_word
+        - avg_paragraph_size
+        - avg_paragraph_processing_time
+        - total_processing_time
+      type: object
+      properties:
+        freq_word:
+          type: string
+          description: most_frequent_word
+        avg_paragraph_size:
+          type: integer
+          format: int32
+          description: avg_paragraph_size
+        avg_paragraph_processing_time:
+          type: number
+          description: avg_paragraph_processing_time, in nanoseconds
+        total_processing_time:
+          type: number
+          description: total_processing_time, in nanoseconds
+      example:
+        freq_word: "lime"
+        avg_paragraph_size: 16
+        avg_paragraph_processing_time: 0.123
+        total_processing_time: 13.12

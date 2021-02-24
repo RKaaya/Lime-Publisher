@@ -24,7 +24,7 @@
         <generated.sources>${project.build.directory}/generated-sources</generated.sources>
         <openapi.resource.dir>${resource.dir}/openapi</openapi.resource.dir>
         <openapi.target.dir>${project.build.directory}/openapi</openapi.target.dir>
-        <openapi.lime.config.name>lime-config.json</openapi.lime.config.name>
+        <openapi.lime.config.name>${basedir}/lime-config.json</openapi.lime.config.name>
     </properties>
 
     <dependencies>
