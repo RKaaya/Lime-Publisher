@@ -20,7 +20,7 @@ public class DefaultLimeTextService implements LimeTextService {
     private LimeTextProcessor limeTextProcessor;
 
     @Override
-    public Lime processLime(Integer pStart, Integer pEnd, Integer wCountMin, Integer wCountMax) {
+    public Lime processLime(final Integer pStart, final Integer pEnd, final Integer wCountMin, final Integer wCountMax) {
         Lime result = null;
         final long start = System.nanoTime();
         try {

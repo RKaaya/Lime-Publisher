@@ -1,3 +1,6 @@
+randomText:
+  BasePath: 'http://www.randomtext.me/api'
+
 spring:
   application:
     name: LimePublisher

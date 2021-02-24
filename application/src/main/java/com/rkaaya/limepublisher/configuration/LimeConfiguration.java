@@ -7,6 +7,7 @@ import com.rkaaya.limepublisher.api.services.messaging.ApiEventProducer;
 import com.rkaaya.limepublisher.infrastructure.application.DefaultLimeTextProcessor;
 import com.rkaaya.limepublisher.infrastructure.application.DefaultLimeTextService;
 import com.rkaaya.limepublisher.infrastructure.application.DefaultRandomTextService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -14,7 +15,8 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class LimeConfiguration {
 
-    private String randomTextBasePath = "http://www.randomtext.me/api";
+    @Value("randomText.BasePath")
+    private String randomTextBasePath;
 
     @Bean
     public LimeTextProcessor limeTextProcessor() {
